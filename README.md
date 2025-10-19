@@ -13,7 +13,9 @@ Demonstrar e comparar o comportamento dos algoritmos de substituição de págin
 - Vinicius Lima Teider
 
 ## Vídeo Explicativo
-[![Watch the video](thumbnail)](linkdovideo)
+[Aperte aqui ou na imagem para abrir o link](https://youtu.be/4ChDCnqv_eM)
+
+[![Watch the video](foto.jpg)](https://youtu.be/4ChDCnqv_eM)
 
 ## 📋 Algoritmos Implementados
 
