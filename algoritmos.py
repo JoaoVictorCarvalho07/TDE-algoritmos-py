@@ -16,9 +16,10 @@ class FIFO:
                     memoria.append(pagina)
                     ordem_entrada.append(pagina)
                 else:
-                    pagina_remover = ordem_entrada.pop(0)
-                    memoria.remove(pagina_remover)
-                    memoria.append(pagina)
+                    pagina_remover = ordem_entrada[0]
+                    idx = memoria.index(pagina_remover)
+                    memoria[idx] = pagina
+                    ordem_entrada.remove(pagina_remover)
                     ordem_entrada.append(pagina)
             historico.append(memoria.copy())
         
@@ -36,16 +37,17 @@ class LRU:
         historico = []
         
         for tempo, pagina in enumerate(sequencia):
+            tempo_acesso[pagina] = tempo
+            
             if pagina not in memoria:
                 faltas_pagina += 1
                 if len(memoria) < self.num_quadros:
                     memoria.append(pagina)
                 else:
                     pagina_lru = min(memoria, key=lambda p: tempo_acesso[p])
-                    memoria.remove(pagina_lru)
-                    memoria.append(pagina)
+                    idx = memoria.index(pagina_lru)
+                    memoria[idx] = pagina
             
-            tempo_acesso[pagina] = tempo
             historico.append(memoria.copy())
         
         return memoria, faltas_pagina, historico
@@ -62,19 +64,17 @@ class MRU:
         historico = []
         
         for tempo, pagina in enumerate(sequencia):
+            tempo_acesso[pagina] = tempo
+            
             if pagina not in memoria:
                 faltas_pagina += 1
                 if len(memoria) < self.num_quadros:
                     memoria.append(pagina)
                 else:
-                    for pag in memoria:
-                        if pag not in tempo_acesso:
-                            tempo_acesso[pag] = -1
                     pagina_mru = max(memoria, key=lambda p: tempo_acesso[p])
-                    memoria.remove(pagina_mru)
-                    memoria.append(pagina)
+                    idx = memoria.index(pagina_mru)
+                    memoria[idx] = pagina
             
-            tempo_acesso[pagina] = tempo
             historico.append(memoria.copy())
         
         return memoria, faltas_pagina, historico
